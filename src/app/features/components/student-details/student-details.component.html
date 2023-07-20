@@ -1,0 +1,135 @@
+<div class="container-fluid p-5">
+  <div class="row border rounded">
+    <div class="col-lg-6 bordered p-3 bg-light">
+      <h2 class="h2 text-center">Student Registration</h2>
+      <hr />
+      <form class="row g-3" [formGroup]="studentForm">
+        <div class="col-lg-6">
+          <label for="" class="form-label">First Name</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            formControlName="firstName"
+            placeholder="Enter Your First Name"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="
+              frmControl['firstName'].invalid && frmControl['firstName'].touched
+            "
+            >Enter valid first name</small
+          >
+        </div>
+        <div class="col-lg-6">
+          <label for="" class="form-label">Last Name</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            formControlName="lastName"
+            placeholder="Enter Your Last Name"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="
+              frmControl['lastName'].invalid && frmControl['lastName'].touched
+            "
+            >Enter valid last name</small
+          >
+        </div>
+        <div class="col-lg-6">
+          <label for="" class="form-label">E-mail Address</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            formControlName="email"
+            placeholder="Enter Your E-mail"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="frmControl['email'].invalid && frmControl['email'].touched"
+            >Enter valid email address</small
+          >
+        </div>
+        <div class="col-lg-6">
+          <label for="" class="form-label">Phone</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            formControlName="phone"
+            placeholder="Enter Your Phone Number"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="frmControl['phone'].invalid && frmControl['phone'].touched"
+            >Enter valid phone number</small
+          >
+        </div>
+        <div class="col-lg-12">
+          <label for="" class="form-label">Course</label>
+          <input
+            type="text"
+            class="form-control form-control-lg"
+            formControlName="course"
+            placeholder="Enter Your Course"
+          />
+          <small
+            class="text-danger p-2"
+            *ngIf="frmControl['course'].invalid && frmControl['course'].touched"
+            >Enter valid course</small
+          >
+        </div>
+        <div class="mt-2">
+          <button class="btn btn-lg btn-primary" (click)="onSubmit()">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+    <div class="col-lg-6">
+      <h2 class="h2 text-center p-2">Student Details</h2>
+      <hr />
+      <table class="table bg-light">
+        <thead class="table-dark">
+          <tr>
+            <th>Id</th>
+            <th>Surname</th>
+            <th>Name</th>
+            <th>E-mail</th>
+            <th>Phone</th>
+            <th>Course</th>
+            <th>Operation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of studentsData; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ student.firstName }}</td>
+            <td>{{ student.lastName }}</td>
+            <td>{{ student.email }}</td>
+            <td>{{ student.phone }}</td>
+            <td>{{ student.course }}</td>
+            <td>
+              <button
+                class="btn btn-md btn-success mx-1"
+                (click)="onUpdate(student)"
+              >
+                <fa-icon [icon]="faPen"></fa-icon>
+              </button>
+              <button
+                class="btn btn-md btn-danger"
+                (click)="onDelete(student.id)"
+              >
+                <fa-icon [icon]="faTrash"></fa-icon>
+              </button>
+            </td>
+          </tr>
+          <tr *ngIf="!studentsData?.length">
+            <td class="text-danger text-center fw-bold" colspan="7">
+              No recored found
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
